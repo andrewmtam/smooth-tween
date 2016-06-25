@@ -27,6 +27,7 @@
     ]
   },
   "dependencies": {
+    "babel-core": "^6.10.4",
     "direction-detection": "^1.0.2",
     "eases": "^1.0.8",
     "jquery": "^3.0.0",

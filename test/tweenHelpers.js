@@ -29,10 +29,6 @@ const dummyAnimation = [
 ];
 
 
-    /*
-constructStaticJson: [Getter],
-getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd: [Getter] }
-*/
 test('Select all animations that should be finished', function(t) {
     t.plan(3);
 
@@ -178,31 +174,128 @@ test('Select all animations that are currently in range', function(t) {
 test('Get animation tween for tween value', function(t) {
     t.plan(4);
 
-    let animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd({
+    let animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent({
         start: 50
         , end: 100
         , unit: '%'
     }, .5);
     t.equal(animationTweenValue, '75%', 'Linear interpolation');
 
-    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd({
+    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent({
         start: 50
         , end: 100
         , unit: 'px'
     }, .5);
     t.equal(animationTweenValue, '75px', 'Check units');
 
-    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd({
+    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent({
         start: 50
         , end: 100
     }, .5);
     t.equal(animationTweenValue, 75, 'Unitless tweening');
 
-    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd({
+    animationTweenValue = tweenHelpers.getTweenValue_forProperty_atPercent({
         start: 50
         , end: 100
         , easing: 'bounceIn'
     }, .5);
     t.ok( animationTweenValue > 50 && animationTweenValue < 100 && animationTweenValue != 75, 'Simple easing test');
+
+});
+
+
+test('Build static json from dynamic functions', function(t) {
+    t.plan(1);
+
+    function returnNumber(num) {
+        return function() {
+            return num*2;
+        }
+    }
+
+    let dynamicJson = [
+        {
+            start: returnNumber(2)
+            , end: returnNumber(4)
+            , animations: [
+                {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: returnNumber(3)
+                            , end: returnNumber(6)
+                        }
+                    }
+                }
+            ]
+        }
+        , {
+            start: returnNumber(9)
+            , end: returnNumber(10)
+            , animations: [
+                {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: returnNumber(20)
+                            , end: returnNumber(30)
+                        }
+                    }
+                }
+                , {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: returnNumber(40)
+                            , end: returnNumber(50)
+                        }
+                    }
+                }
+            ]
+        }
+    ];
+
+    var staticJson = tweenHelpers.constructStaticJson(dynamicJson);
+    t.deepEqual(staticJson, [
+        {
+            start: 4
+            , end: 8
+            , animations: [
+                {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: 6
+                            , end: 12
+                        }
+                    }
+                }
+            ]
+        }
+        , {
+            start: 18
+            , end: 20
+            , animations: [
+                {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: 40
+                            , end: 60
+                        }
+                    }
+                }
+                , {
+                    selector: 'landing__circle-left'
+                    , properties: {
+                        opacity: {
+                            start: 80
+                            , end: 100
+                        }
+                    }
+                }
+            ]
+        }
+    ]);
 
 });

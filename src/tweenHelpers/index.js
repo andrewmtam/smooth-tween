@@ -30,7 +30,6 @@ export function constructStaticJson(animation) {
 
         let start = getValFromFunction(currSet.start);
         let end = getValFromFunction(currSet.end);
-        let id = uuid.v4();
         let animations = _.map(currSet.animations, currAnimation => {
 
             let properties = _.mapValues( currAnimation.properties, prop => {
@@ -40,7 +39,7 @@ export function constructStaticJson(animation) {
             return Object.assign({}, currAnimation, {properties});
         })
 
-        return Object.assign({}, currSet, {start, end, animations, id});
+        return Object.assign({}, currSet, {start, end, animations});
     })
 
     function getValFromFunction(val) {
@@ -68,7 +67,7 @@ export function getAnimation__withScrollTop(animation, scrollTop) {
     });
 }
 
-export function getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd(property, percent ) {
+export function getTweenValue_forProperty_atPercent(property, percent ) {
 
     let {
         start: propStart
@@ -119,6 +118,10 @@ export function getTweenValue_forProperty_atPercent_withAnimationStart_withAnima
         //}
     }
 
+}
+
+export function insertUniqueIdentifierToAnimation(animations) {
+    return _.map(animations, animation => Object.assign({}, animation, {id: uuid.v4()}))
 }
 
 

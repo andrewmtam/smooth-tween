@@ -16,8 +16,8 @@ import {
     , getFutureAnimations__withTweenValue
     , constructStaticJson
     , getAnimation__withScrollTop
-    , selectorToJqueryObject
-    , getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd
+    , getTweenValue_forProperty_atPercent
+    , insertUniqueIdentifierToAnimation
 } from './tweenHelpers';
 
 import directionDetection from 'direction-detection';
@@ -31,7 +31,7 @@ import {
 
 export default function(animationData) {
 
-    let staticAnimation = constructStaticJson(animationData);
+    let staticAnimation = insertUniqueIdentifierToAnimation(constructStaticJson(animationData));
 
     let valueManager = directionDetection({
         onIncrease(scrollTop) {
@@ -160,7 +160,7 @@ export default function(animationData) {
             }
 
             _.forEach(properties, (propertyDetails, prop) => {
-                Velocity.hook(element, prop, getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd(propertyDetails, percent, start, end));
+                Velocity.hook(element, prop, getTweenValue_forProperty_atPercent(propertyDetails, percent, start, end));
                 Velocity.hook(element, 'translateZ', '1px');
             });
 
