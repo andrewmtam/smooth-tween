@@ -1,24 +1,48 @@
 {
   "name": "tween-machine",
   "version": "1.0.0",
-  "description": "",
+  "description": "60 fps DOM animations in the browser and mobile devices",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape-watch -r babel-register test/* | tap-spec"
   },
   "author": "",
   "license": "ISC",
   "browserify": {
     "transform": [
       [
-        "babelify", {
-          "presets": ["es2015", "react"]
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
         }
       ]
     ]
   },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "dependencies": {
+    "direction-detection": "^1.0.2",
+    "eases": "^1.0.8",
     "jquery": "^3.0.0",
-    "lodash": "^4.13.1"
-  }
+    "lodash": "^4.13.1",
+    "velocity-animate": "^1.2.3"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrew-tam-000/tween-machine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrew-tam-000/tween-machine/issues"
+  },
+  "homepage": "https://github.com/andrew-tam-000/tween-machine#readme"
 }

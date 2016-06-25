@@ -1,1 +1,2 @@
-export * from './src/windowManager';
+import * as windowManager from './src/windowManager';
+export default windowManager;

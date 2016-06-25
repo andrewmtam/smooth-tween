@@ -1,10 +1,6 @@
 import _ from 'lodash';
 import uuid from 'node-uuid';
-import modularEasings from '../modularEasings'
-
-import {
-    easingHelper
-} from '../utilities';
+import easingFunctions from 'eases';
 
 export function getFinishedAnimations__withTweenValue(animation, scrollTop) {
     return _.filter(animation, (o) => {
@@ -97,19 +93,16 @@ export function getTweenValue_forProperty_atPercent_withAnimationStart_withAnima
         let finalValue, interpolation;
 
         if ( easing ) {
-            finalValue = easingHelper(
-                _.get(modularEasings, easing)
-                , animationStart
-                , propStart
-                , propEnd
-                , animationEnd
-                , percent
-            );
+            if ( !easingFunctions[easing] ) {
+                console.error("Easing is not support:", easing);
+            }
+            else {
+                percent = easingFunctions[easing](percent);
+            }
         }
-        else {
-            interpolation = ( propEnd - propStart ) * percent;
-            finalValue = interpolation + propStart;
-        }
+
+        interpolation = ( propEnd - propStart ) * percent;
+        finalValue = interpolation + propStart;
 
 
         //let tolerance = ( propEnd - propStart ) / 5000;

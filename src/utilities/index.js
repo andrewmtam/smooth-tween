@@ -57,14 +57,3 @@ export function getJqueryObjectFromSelector(selector) {
 
     return element;
 }
-
-
-export function easingHelper(easing, startTime, startValue, endValue, endTime, percentComplete) {
-    let duration = endTime - startTime;
-    let changeInValue = endValue - startValue;
-
-    let val = easing(null, duration*percentComplete, startValue, changeInValue, duration)
-    //console.log(startTime, startValue, endValue, duration, val);
-
-    return val;
-}

@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import Velocity from 'velocity-animate';
-import modularEasings from './modularEasings';
 import {
     getWindowHeight
     , getWindowWidth
@@ -10,8 +9,7 @@ import {
 import {
     getSelector__withDataJs
     , getJqueryObjectFromSelector
-    , easingHelper
-} from 'tween-machine/utilities';
+} from './utilities';
 
 import {
     getFinishedAnimations__withTweenValue
