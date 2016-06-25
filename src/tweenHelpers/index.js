@@ -68,7 +68,7 @@ export function getAnimation__withScrollTop(animation, scrollTop) {
     });
 }
 
-export function getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd(property, percent, animationStart, animationEnd) {
+export function getTweenValue_forProperty_atPercent_withAnimationStart_withAnimationEnd(property, percent ) {
 
     let {
         start: propStart
