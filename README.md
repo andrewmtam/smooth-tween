@@ -4,6 +4,8 @@ A JSON powered, functional parallax scrolling library that uses native scrolling
 
 As a consequence, 60fps animations are achievable in both desktop browsers and mobile devices.
 
+A very basic example and code base can be seen here: http://andrew-tam-000.github.io/tween-machine/
+
 ## Use Cases
 
 ### Parallax Scrolling
