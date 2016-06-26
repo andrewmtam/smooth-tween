@@ -1,8 +1,12 @@
-# tween-machine
+# smooth-tween
 
 A JSON powered, functional parallax scrolling library that uses native scrolling (no iscroll, or custom scrolling required)!
 
 As a consequence, 60fps animations are achievable in both desktop browsers and mobile devices.
+
+A very basic example and code base can be seen here: http://andrew-tam-000.github.io/smooth-tween/
+
+The minimal javascript for the example is here: http://andrew-tam-000.github.io/smooth-tween/js/main.js -- the rest is done with simple CSS and HTML!
 
 ## Use Cases
 
@@ -12,24 +16,26 @@ Bind animations to the mouse scroll event to create stunning parallax effect and
 
 ### Functional Animations
 
-While the primary use case for this is most likely for parallax scrolling, tween-machine has been built in a functional way.  The user can choose what tool will 'drive' their animations, whether it be scrolling, mouse movement, clicking, etc...
+While the primary use case for this is most likely for parallax scrolling, smooth-tween has been built in a functional way.  The user can choose what tool will 'drive' their animations, whether it be scrolling, mouse movement, clicking, etc...
 
 ## Theory
 
-There seem to exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'tween-machine' aims to produce performant scroll based animations.
+There seem to exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'smooth-tween' aims to produce performant scroll based animations.
 
 
-In order to achieve this, 'tween-machine' relies on the following DOM structure:
+In order to achieve this, 'smooth-tween' relies on the following DOM structure:
 
 
-```
+```html
 <body>
     <div class='content'>
         All animation content goes here
     </div>
     <div class='scrollable' >
-        This div will actually be empty!
-        But it will be scrollable and have a calculated height
+        <div class='scrollable-height-setter'></div>
+        This div will actually be empty, other than the height setter!
+        It's main purpose is to capture scroll events natively,
+        and pass them off to the smooth-tween to do its thing.
     </div>
 </body>
 ```
@@ -45,20 +51,16 @@ The solution I have implemented is based on these responses:
 
 Essentially, it leverages the 'document.elementFromPoint' property to forward events to DOM objects below the current layer.
 
-Lastly, keep in mind that this approach / setup is valid only for usage with a full-site parallax experience.
-
-TODO: Make this a separate npm package.
+Lastly, keep in mind that this event forwarding approach is applies only for usage with a full-site, scroll-based parallax experience.
 
 
 ## Installation
 
-Download the twean machine library by doing the following:
+Download the 'smooth-tween' library by doing the following:
 
 ```
-npm install --save tween-machine
+npm install --save smooth-tween
 ```
-
-TODO: Build a stand-alone minified version of this library.
 
 ### JSON Definition
 
@@ -67,7 +69,7 @@ The tweenMachine is driven by a JSON file.
 This file should describe all the animations that should happen, and when.
 
 #### Annotated Example
-```
+```javascript
 [
     // The JSON file should be an array of different tween durations
 
@@ -137,6 +139,12 @@ This file should describe all the animations that should happen, and when.
                         // no unit.  You must explicitly pass the unit
                         // ( 'px', '%', 'em', etc... )
                         , unit: 'em'
+
+                        // Lastly, easing is supported!
+                        // I am leveraging this library :https://www.npmjs.com/package/eases
+                        // Simply supply the camel-cased name of the function,
+                        // and the easing will be applied
+                        , easing: 'backInOut'
                     }
                 }
             }
@@ -147,7 +155,7 @@ This file should describe all the animations that should happen, and when.
 
 
 ### Clean Example ( no annotations )
-```
+```javascript
 [
     {
         start: () => percentHeightToPx(0)
@@ -229,8 +237,8 @@ This file should describe all the animations that should happen, and when.
 
 The Tweener constructor that gets loaded in accepts only one argument -- your JSON definition.
 
-```
-import TweenMachine from 'tween-machine';
+```javascript
+import TweenMachine from 'smooth-tween';
 let tweenInstance = TweenMachine(animationData);
 ```
 
@@ -240,7 +248,7 @@ let tweenInstance = TweenMachine(animationData);
 'updateTween' must be called in order to tell 'tweenMachine' what the next value to tween is.
 
 
-```
+```javascript
 scrollLayer.on('scroll', (e) => {
     let scrollTop = scrollLayer.scrollTop();
     tweenInstance.updateTween(scrollTop);
@@ -256,7 +264,7 @@ This method evaluates those functions and constructs the static JSON.
 
 This is helpful if the functions are dependent on window size ( sometimes we like to translate things '100%' but the pixel of that will change when the window is resized  )
 
-```
+```javascript
 $(window).on('resize', () => {
     var staticJson = tweenInstance.recalculateStaticJson();
     var maxHeight = getMaxHeight_withAnimation_withWindowHeight( staticJson, $(window).height());
@@ -280,24 +288,104 @@ $(window).on('resize', () => {
 
 ### Parallax Site
 
-```
-import tweenerMachine from 'tween-machine';
+#### HTML
 
-// This div will be resopnsible for holding
-// all the parallax content of the site
-let scrollLayer = $("[data-js='scroll-layer]");
+```html
+...
+<body>
+    <div data-js='scroll-layer'>
+        <div data-js='scroll-height'></div>
+    </div>
+    <div data-js='scroll-content'>
+        <div class='background__slide--circle'></div>
+        <div class='circle__text'></div>
+    </div>
+</body>
+...
+```
+
+#### CSS
+
+There is a minimum amount of neccesary CSS to get started.
+
+```css
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+[data-js="scroll-layer"],
+[data-js="scroll-content"] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+[data-js="scroll-layer"] {
+    overflow-y: auto;
+
+    // Allows smooth scrolling on IOS
+    -webkit-overflow-scrolling: touch;
+}
+
+
+[data-js="scroll-height"] {
+    // This height shoudl be set via javascript
+    // It determines how far a user
+    // should be able to scroll the page
+    height: 1000%;
+}
+```
+
+#### JavaScript
+
+```javascript
+var animationData = [
+    {
+        start: 100
+        , end: 200
+        , animations: [
+            {
+                selector: 'background__slide--circle'
+                , properties: {
+                    translateY: {
+                        start: 100
+                        , end: 0
+                        , unit: '%'
+                    }
+                }
+            }
+            , {
+                selector: 'circle__text'
+                , properties: {
+                    translateY: {
+                        start: 50
+                        , end: 0
+                        , unit: 'px'
+                    }
+                }
+            }
+        ]
+    }
+];
+
+import tweenMachine from 'smooth-tween';
 
 // This div will solely be responsible for keeping track
 // of the scroll height.
+let scrollLayer = $("[data-js='scroll-layer]");
 
-// When the user scrolls, the will really be scrolling
-// on this div
+// This div will set the height of the scrollLayer ( and make it scrollable )
 let scrollHeight = $("[data-js='scroll-height]");
 
 // Using our JSON definition, construct the actual tweenMachine instance
-let tweenInstance = tweenerMachine(animationData);
+let tweenInstance = tweenMachine(animationData);
 
-// On resize, also, recalculate teh static json
+// On resize, recalculate teh static json
 // so that we can properly set the height
 // of the scrollable div
 $(window).on('resize', resizeScrollerOnWindowResize)
