@@ -7,7 +7,7 @@
     "test-watch": "tape-watch -r babel-register test/* | tap-spec",
     "test": "babel-tape-runner -r babel-register test/* | tap-spec",
     "build": "babel src --out-dir lib",
-    "dist": "browserify --standalone tweenMachine src/index.js > dist/smoothe-tween.min.js",
+    "dist": "browserify --standalone smoothTween src/index.js > dist/smooth-tween.min.js",
     "prepublish": "npm run dist && npm run build"
   },
   "author": "",

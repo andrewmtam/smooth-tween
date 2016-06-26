@@ -64,7 +64,7 @@ npm install --save smooth-tween
 
 ### JSON Definition
 
-The tweenMachine is driven by a JSON file.
+The smoothTween is driven by a JSON file.
 
 This file should describe all the animations that should happen, and when.
 
@@ -245,7 +245,7 @@ let tweenInstance = TweenMachine(animationData);
 #### TweenMachine.updateTween(tweenValue [ Number | String ])
 
 
-'updateTween' must be called in order to tell 'tweenMachine' what the next value to tween is.
+'updateTween' must be called in order to tell 'smoothTween' what the next value to tween is.
 
 
 ```javascript
@@ -373,7 +373,7 @@ var animationData = [
     }
 ];
 
-import tweenMachine from 'smooth-tween';
+import smoothTween from 'smooth-tween';
 
 // This div will solely be responsible for keeping track
 // of the scroll height.
@@ -382,8 +382,8 @@ let scrollLayer = $("[data-js='scroll-layer]");
 // This div will set the height of the scrollLayer ( and make it scrollable )
 let scrollHeight = $("[data-js='scroll-height]");
 
-// Using our JSON definition, construct the actual tweenMachine instance
-let tweenInstance = tweenMachine(animationData);
+// Using our JSON definition, construct the actual smoothTween instance
+let tweenInstance = smoothTween(animationData);
 
 // On resize, recalculate teh static json
 // so that we can properly set the height
@@ -397,7 +397,7 @@ function resizeScrollerOnWindowResize() {
     scrollHeight.height( maxHeight );
 }
 
-// Pass the tween value to the tweenMachine instance so that it can render the next animation
+// Pass the tween value to the smoothTween instance so that it can render the next animation
 scrollLayer.on('scroll', (e) => {
     let scrollTop = scrollLayer.scrollTop();
     tweenInstance.updateTween(scrollTop);
