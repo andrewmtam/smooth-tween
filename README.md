@@ -1,12 +1,29 @@
 # smooth-tween
 
-A JSON powered, functional parallax scrolling library that uses native scrolling (no iscroll, or custom scrolling required)!
+A JSON powered, functional parallax scrolling library that uses native scrolling (no iScroll, or custom scrolling required)!
 
 As a consequence, 60fps animations are achievable in both desktop browsers and mobile devices.
 
 A very basic example and code base can be seen here: http://andrew-tam-000.github.io/smooth-tween/
 
 The minimal javascript for the example is here: http://andrew-tam-000.github.io/smooth-tween/js/main.js -- the rest is done with simple CSS and HTML!
+
+
+## Motivation
+
+The motivation for this project was to create an awesome parallax / scroll animation library that doesn't require iScroll ( and thus performs well in mobile browsers ).
+
+Note: To acheive the maximum possible performance, its recommended that you only use the following css properties:
+
+* transform
+    * translate
+    * scale
+    * rotation
+* opacity
+
+While this may seem very limited, there are tons of tricks and complex animations you can implement with just these properties.
+
+You can read more about this here: http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/
 
 ## Use Cases
 
@@ -20,7 +37,7 @@ While the primary use case for this is most likely for parallax scrolling, smoot
 
 ## Theory
 
-There seem to exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'smooth-tween' aims to produce performant scroll based animations.
+There exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'smooth-tween' aims to produce performant scroll based animations.
 
 
 In order to achieve this, 'smooth-tween' relies on the following DOM structure:
@@ -67,6 +84,13 @@ npm install --save smooth-tween
 The smoothTween is driven by a JSON file.
 
 This file should describe all the animations that should happen, and when.
+
+List of features:
+* Flexible 'selectors'
+* Lazily evaluated 'start' and 'end' functions
+* Easings
+* Execute multiple animations at once
+
 
 #### Annotated Example
 ```javascript
