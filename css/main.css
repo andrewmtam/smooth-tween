@@ -15,6 +15,7 @@ html, body {
 
 .scroller {
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 
