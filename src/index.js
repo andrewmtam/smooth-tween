@@ -29,8 +29,9 @@ import {
 
 
 export default function(animationData) {
+    let augmentedAnimationData = insertUniqueIdentifierToAnimation(animationData);
 
-    let staticAnimation = insertUniqueIdentifierToAnimation(constructStaticJson(animationData));
+    let staticAnimation = constructStaticJson(augmentedAnimationData);
 
     let valueManager = directionDetection({
         onIncrease(scrollTop) {
@@ -61,7 +62,7 @@ export default function(animationData) {
             }
         }
         , recalculateStaticJson: () => {
-            return setStaticJson(constructStaticJson(animationData));
+            return setStaticJson(constructStaticJson(augmentedAnimationData));
         }
     }
 
