@@ -37,7 +37,9 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jsdom": "^9.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andrew-tam-000/tween-machine.git"

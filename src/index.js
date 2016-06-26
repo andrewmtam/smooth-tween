@@ -8,7 +8,6 @@ import {
 
 import {
     getSelector__withDataJs
-    , getJqueryObjectFromSelector
 } from './utilities';
 
 import {
@@ -152,7 +151,14 @@ export default function(animationData) {
                 , properties
             } = animation;
 
-            let element = getJqueryObjectFromSelector(selector);
+            // Assuem we specified a jquery object
+            // as the selector
+            let element = selector;
+
+            // If not, then construct it
+            if ( !selector.jquery ) {
+                element = $( getSelector__withDataJs(selector) );
+            }
 
             // Allows us to override the percent to 100%
             if ( _.isUndefined(percent)) {
@@ -163,7 +169,6 @@ export default function(animationData) {
                 Velocity.hook(element, prop, getTweenValue_forProperty_atPercent(propertyDetails, percent, start, end));
                 Velocity.hook(element, 'translateZ', '1px');
             });
-
 
         });
 
