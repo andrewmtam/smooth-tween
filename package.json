@@ -4,7 +4,8 @@
   "description": "60 fps DOM animations in the browser and mobile devices",
   "main": "index.js",
   "scripts": {
-    "test": "tape-watch -r babel-register test/* | tap-spec"
+    "test-watch": "tape-watch -r babel-register test/* | tap-spec",
+    "test": "babel-tape-runner -r babel-register test/* | tap-spec"
   },
   "author": "",
   "license": "ISC",
