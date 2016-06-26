@@ -6,6 +6,8 @@ As a consequence, 60fps animations are achievable in both desktop browsers and m
 
 A very basic example and code base can be seen here: http://andrew-tam-000.github.io/tween-machine/
 
+A more touched up example can be found on my homepage: http://andrewmtam.com/
+
 ## Use Cases
 
 ### Parallax Scrolling
@@ -282,7 +284,55 @@ $(window).on('resize', () => {
 
 ### Parallax Site
 
+#### HTML
+
 ```
+...
+<body>
+    <div data-js='scroll-layer'>
+        <div data-js='scroll-height'></div>
+    </div>
+    <div data-js='scroll-content'>
+        <!-- 
+            All the parallax content / site content goes here
+        -->
+    </div>
+</body>
+...
+```
+
+#### JavaScript
+
+```
+var animationData = [
+    {
+        start: 100
+        , end: 200
+        , animations: [
+            {
+                selector: 'background__slide--circle'
+                , properties: {
+                    translateY: {
+                        start: 100
+                        , end: 0
+                        , unit: '%'
+                    }
+                }
+            }
+            , {
+                selector: 'circle__text'
+                , properties: {
+                    translateY: {
+                        start: 50
+                        , end: 0
+                        , unit: 'px'
+                    }
+                }
+            }
+        ]
+    }
+];
+
 import tweenerMachine from 'tween-machine';
 
 // This div will be resopnsible for holding
