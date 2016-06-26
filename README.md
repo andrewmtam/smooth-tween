@@ -8,8 +8,6 @@ A very basic example and code base can be seen here: http://andrew-tam-000.githu
 
 The minimal javascript for the example is here: http://andrew-tam-000.github.io/tween-machine/js/main.js -- the rest is done with simple CSS and HTML!
 
-A more touched up example can be found on my homepage: http://andrewmtam.com/
-
 ## Use Cases
 
 ### Parallax Scrolling
