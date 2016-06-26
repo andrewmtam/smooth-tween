@@ -1,0 +1,101 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax, .scroller {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.scroller {
+    overflow-y: auto;
+}
+
+
+.scroller-height {
+    height: 1260%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.slide--2 {
+    background-color: black;
+}
+
+.slide--2-text {
+    color: white;
+    text-align: center;
+    top: 50%;
+    position: relative;
+}
+
+.circle {
+    background-color: black;
+    border-radius: 50%;
+    height: 50%;
+    width: 50%;
+    left: 25%;
+    top: 25%;
+    position: absolute;
+}
+
+.circle__text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    left: 50%;
+}
+
+
+.square {
+    width: 40%;
+    padding-bottom: 40%;
+    position: absolute;
+}
+
+.background-red {
+    background-color: red;
+}
+
+.background-blue{
+    background-color: blue;
+}
+
+.background-green{
+    background-color: green;
+}
+
+.background-yellow{
+    background-color: yellow;
+}
+
+.enter-top {
+    top: 0;
+    left: 30%;
+}
+
+.enter-bottom {
+    bottom: 0;
+    left: 30%;
+}
+
+.enter-right {
+    top: 30%;
+    right: 0;
+}
+
+.enter-left {
+    top: 30%;
+    left: 0;
+}
