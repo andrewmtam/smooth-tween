@@ -144,7 +144,7 @@ This file should describe all the animations that should happen, and when.
                         // I am leveraging this library :https://www.npmjs.com/package/eases
                         // Simply supply the camel-cased name of the function,
                         // and the easing will be applied
-                        , easing: 'backInOut
+                        , easing: 'backInOut'
                     }
                 }
             }
