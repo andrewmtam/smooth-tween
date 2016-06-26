@@ -8,7 +8,7 @@
     "test": "babel-tape-runner -r babel-register test/* | tap-spec",
     "build": "babel src --out-dir lib",
     "dist": "browserify --standalone tweenMachine src/index.js > dist/tween-machine.min.js",
-    "prepublish": "npm run dist && npm run build"
+    "prepublish": "npm run dist && npm run build && npm version patch"
   },
   "author": "",
   "license": "ISC",
