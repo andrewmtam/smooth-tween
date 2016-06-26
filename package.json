@@ -1,6 +1,6 @@
 {
   "name": "smooth-tween",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "60 fps DOM animations in the browser and mobile devices",
   "main": "lib/index.js",
   "scripts": {
