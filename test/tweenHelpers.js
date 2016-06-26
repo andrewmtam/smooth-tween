@@ -1,5 +1,5 @@
 import test from 'tape';
-import * as tweenHelpers from '../tweenHelpers';
+import * as tweenHelpers from '../src/tweenHelpers';
 
 const dummyAnimation = [
     {
