@@ -1,14 +1,6 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import Velocity from 'velocity-animate';
-import {
-    getWindowHeight
-    , getWindowWidth
-} from './windowManager';
-
-import {
-    getSelector__withDataJs
-} from './utilities';
 
 import {
     getFinishedAnimations__withTweenValue
@@ -158,7 +150,7 @@ export default function(animationData) {
 
             // If not, then construct it
             if ( !selector.jquery ) {
-                element = $( getSelector__withDataJs(selector) );
+                element = $( getSelectorWithDataJs(selector) );
             }
 
             // Allows us to override the percent to 100%
@@ -178,6 +170,19 @@ export default function(animationData) {
     function setStaticJson(staticJson) {
         staticAnimation = staticJson;
         return staticAnimation;
+    }
+
+    function getSelectorWithDataJs(dataJs) {
+        if ( _.isArray(dataJs) ) {
+            return _.map(dataJs, selector =>  _addDataJs(selector)).join(',');
+        }
+        else {
+            return _addDataJs(dataJs);
+        }
+
+        function _addDataJs(selector) {
+            return `[data-js="${selector}"]`;
+        }
     }
 
 }
