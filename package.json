@@ -1,5 +1,5 @@
 {
-  "name": "tween-machine",
+  "name": "smooth-tween",
   "version": "1.0.7",
   "description": "60 fps DOM animations in the browser and mobile devices",
   "main": "lib/index.js",
@@ -7,7 +7,7 @@
     "test-watch": "tape-watch -r babel-register test/* | tap-spec",
     "test": "babel-tape-runner -r babel-register test/* | tap-spec",
     "build": "babel src --out-dir lib",
-    "dist": "browserify --standalone tweenMachine src/index.js > dist/tween-machine.min.js",
+    "dist": "browserify --standalone tweenMachine src/index.js > dist/smoothe-tween.min.js",
     "prepublish": "npm run dist && npm run build"
   },
   "author": "",
@@ -52,10 +52,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrew-tam-000/tween-machine.git"
+    "url": "git+https://github.com/andrew-tam-000/smooth-tween.git"
   },
   "bugs": {
-    "url": "https://github.com/andrew-tam-000/tween-machine/issues"
+    "url": "https://github.com/andrew-tam-000/smooth-tween/issues"
   },
-  "homepage": "https://github.com/andrew-tam-000/tween-machine#readme"
+  "homepage": "https://github.com/andrew-tam-000/smooth-tween#readme"
 }

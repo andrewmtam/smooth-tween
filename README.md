@@ -1,12 +1,12 @@
-# tween-machine
+# smooth-tween
 
 A JSON powered, functional parallax scrolling library that uses native scrolling (no iscroll, or custom scrolling required)!
 
 As a consequence, 60fps animations are achievable in both desktop browsers and mobile devices.
 
-A very basic example and code base can be seen here: http://andrew-tam-000.github.io/tween-machine/
+A very basic example and code base can be seen here: http://andrew-tam-000.github.io/smooth-tween/
 
-The minimal javascript for the example is here: http://andrew-tam-000.github.io/tween-machine/js/main.js -- the rest is done with simple CSS and HTML!
+The minimal javascript for the example is here: http://andrew-tam-000.github.io/smooth-tween/js/main.js -- the rest is done with simple CSS and HTML!
 
 ## Use Cases
 
@@ -16,14 +16,14 @@ Bind animations to the mouse scroll event to create stunning parallax effect and
 
 ### Functional Animations
 
-While the primary use case for this is most likely for parallax scrolling, tween-machine has been built in a functional way.  The user can choose what tool will 'drive' their animations, whether it be scrolling, mouse movement, clicking, etc...
+While the primary use case for this is most likely for parallax scrolling, smooth-tween has been built in a functional way.  The user can choose what tool will 'drive' their animations, whether it be scrolling, mouse movement, clicking, etc...
 
 ## Theory
 
-There seem to exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'tween-machine' aims to produce performant scroll based animations.
+There seem to exist many parallax scrolling libraries out there, but few are optimized for mobile devices.  By utilizing the browser's native scrolling, 'smooth-tween' aims to produce performant scroll based animations.
 
 
-In order to achieve this, 'tween-machine' relies on the following DOM structure:
+In order to achieve this, 'smooth-tween' relies on the following DOM structure:
 
 
 ```html
@@ -35,7 +35,7 @@ In order to achieve this, 'tween-machine' relies on the following DOM structure:
         <div class='scrollable-height-setter'></div>
         This div will actually be empty, other than the height setter!
         It's main purpose is to capture scroll events natively,
-        and pass them off to the tween-machine to do its thing.
+        and pass them off to the smooth-tween to do its thing.
     </div>
 </body>
 ```
@@ -56,10 +56,10 @@ Lastly, keep in mind that this event forwarding approach is applies only for usa
 
 ## Installation
 
-Download the 'tween-machine' library by doing the following:
+Download the 'smooth-tween' library by doing the following:
 
 ```
-npm install --save tween-machine
+npm install --save smooth-tween
 ```
 
 ### JSON Definition
@@ -238,7 +238,7 @@ This file should describe all the animations that should happen, and when.
 The Tweener constructor that gets loaded in accepts only one argument -- your JSON definition.
 
 ```javascript
-import TweenMachine from 'tween-machine';
+import TweenMachine from 'smooth-tween';
 let tweenInstance = TweenMachine(animationData);
 ```
 
@@ -373,7 +373,7 @@ var animationData = [
     }
 ];
 
-import tweenMachine from 'tween-machine';
+import tweenMachine from 'smooth-tween';
 
 // This div will solely be responsible for keeping track
 // of the scroll height.
