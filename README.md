@@ -26,7 +26,7 @@ There seem to exist many parallax scrolling libraries out there, but few are opt
 In order to achieve this, 'tween-machine' relies on the following DOM structure:
 
 
-```
+```html
 <body>
     <div class='content'>
         All animation content goes here
@@ -69,7 +69,7 @@ The tweenMachine is driven by a JSON file.
 This file should describe all the animations that should happen, and when.
 
 #### Annotated Example
-```
+```json
 [
     // The JSON file should be an array of different tween durations
 
@@ -155,7 +155,7 @@ This file should describe all the animations that should happen, and when.
 
 
 ### Clean Example ( no annotations )
-```
+```json
 [
     {
         start: () => percentHeightToPx(0)
@@ -237,7 +237,7 @@ This file should describe all the animations that should happen, and when.
 
 The Tweener constructor that gets loaded in accepts only one argument -- your JSON definition.
 
-```
+```javascript
 import TweenMachine from 'tween-machine';
 let tweenInstance = TweenMachine(animationData);
 ```
@@ -248,7 +248,7 @@ let tweenInstance = TweenMachine(animationData);
 'updateTween' must be called in order to tell 'tweenMachine' what the next value to tween is.
 
 
-```
+```javascript
 scrollLayer.on('scroll', (e) => {
     let scrollTop = scrollLayer.scrollTop();
     tweenInstance.updateTween(scrollTop);
@@ -264,7 +264,7 @@ This method evaluates those functions and constructs the static JSON.
 
 This is helpful if the functions are dependent on window size ( sometimes we like to translate things '100%' but the pixel of that will change when the window is resized  )
 
-```
+```javascript
 $(window).on('resize', () => {
     var staticJson = tweenInstance.recalculateStaticJson();
     var maxHeight = getMaxHeight_withAnimation_withWindowHeight( staticJson, $(window).height());
@@ -290,24 +290,60 @@ $(window).on('resize', () => {
 
 #### HTML
 
-```
+```html
 ...
 <body>
     <div data-js='scroll-layer'>
         <div data-js='scroll-height'></div>
     </div>
     <div data-js='scroll-content'>
-        <!-- 
-            All the parallax content / site content goes here
-        -->
+        <div class='background__slide--circle'></div>
+        <div class='circle__text'></div>
     </div>
 </body>
 ...
 ```
 
+#### CSS
+
+There is a minimum amount of neccesary CSS to get started.
+
+```css
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+[data-js="scroll-layer"],
+[data-js="scroll-content"] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+[data-js="scroll-layer"] {
+    overflow-y: auto;
+
+    // Allows smooth scrolling on IOS
+    -webkit-overflow-scrolling: touch;
+}
+
+
+[data-js="scroll-height"] {
+    // This height shoudl be set via javascript
+    // It determines how far a user
+    // should be able to scroll the page
+    height: 1000%;
+}
+```
+
 #### JavaScript
 
-```
+```javascript
 var animationData = [
     {
         start: 100
@@ -337,23 +373,19 @@ var animationData = [
     }
 ];
 
-import tweenerMachine from 'tween-machine';
-
-// This div will be resopnsible for holding
-// all the parallax content of the site
-let scrollLayer = $("[data-js='scroll-layer]");
+import tweenMachine from 'tween-machine';
 
 // This div will solely be responsible for keeping track
 // of the scroll height.
+let scrollLayer = $("[data-js='scroll-layer]");
 
-// When the user scrolls, the will really be scrolling
-// on this div
+// This div will set the height of the scrollLayer ( and make it scrollable )
 let scrollHeight = $("[data-js='scroll-height]");
 
 // Using our JSON definition, construct the actual tweenMachine instance
-let tweenInstance = tweenerMachine(animationData);
+let tweenInstance = tweenMachine(animationData);
 
-// On resize, also, recalculate teh static json
+// On resize, recalculate teh static json
 // so that we can properly set the height
 // of the scrollable div
 $(window).on('resize', resizeScrollerOnWindowResize)
