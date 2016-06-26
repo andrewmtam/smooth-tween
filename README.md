@@ -69,7 +69,7 @@ The tweenMachine is driven by a JSON file.
 This file should describe all the animations that should happen, and when.
 
 #### Annotated Example
-```json
+```javascript
 [
     // The JSON file should be an array of different tween durations
 
@@ -155,7 +155,7 @@ This file should describe all the animations that should happen, and when.
 
 
 ### Clean Example ( no annotations )
-```json
+```javascript
 [
     {
         start: () => percentHeightToPx(0)
