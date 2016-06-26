@@ -1,6 +1,6 @@
 {
   "name": "tween-machine",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "60 fps DOM animations in the browser and mobile devices",
   "main": "lib/index.js",
   "scripts": {
