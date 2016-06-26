@@ -7,7 +7,8 @@
     "test-watch": "tape-watch -r babel-register test/* | tap-spec",
     "test": "babel-tape-runner -r babel-register test/* | tap-spec",
     "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "dist": "browserify --standalone tweenMachine src/index.js > dist/tween-machine.min.js",
+    "prepublish": "npm run dist && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-tape-runner": "^2.0.1",
     "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
     "tape-watch": "^2.1.0"
