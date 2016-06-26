@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Velocity from 'velocity-animate';
+import $ from 'jquery';
 
 import {
     getFinishedAnimations__withTweenValue
