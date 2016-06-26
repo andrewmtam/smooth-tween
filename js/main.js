@@ -360,7 +360,7 @@ var animationData = [
 
 
 
-var tweenInstance = tweenMachine.default(animationData);
+var tweenInstance = smoothTween.default(animationData);
 
 var scroller = $('.scroller');
 scroller.on('scroll', function() {
