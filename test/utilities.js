@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import test from 'tape';
 import * as utilities from '../utilities';
-import jsdom from 'jsdom';
 
 test('Convert string to data-js selector', function(t) {
     t.plan(2);
