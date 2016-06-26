@@ -32,8 +32,10 @@ In order to achieve this, 'tween-machine' relies on the following DOM structure:
         All animation content goes here
     </div>
     <div class='scrollable' >
-        This div will actually be empty!
-        But it will be scrollable and have a calculated height
+        <div class='scrollable-height-setter'></div>
+        This div will actually be empty, other than the height setter!
+        It's main purpose is to capture scroll events natively,
+        and pass them off to the tween-machine to do its thing.
     </div>
 </body>
 ```
@@ -49,20 +51,16 @@ The solution I have implemented is based on these responses:
 
 Essentially, it leverages the 'document.elementFromPoint' property to forward events to DOM objects below the current layer.
 
-Lastly, keep in mind that this approach / setup is valid only for usage with a full-site parallax experience.
-
-TODO: Make this a separate npm package.
+Lastly, keep in mind that this event forwarding approach is applies only for usage with a full-site, scroll-based parallax experience.
 
 
 ## Installation
 
-Download the twean machine library by doing the following:
+Download the 'tween-machine' library by doing the following:
 
 ```
 npm install --save tween-machine
 ```
-
-TODO: Build a stand-alone minified version of this library.
 
 ### JSON Definition
 
@@ -141,6 +139,12 @@ This file should describe all the animations that should happen, and when.
                         // no unit.  You must explicitly pass the unit
                         // ( 'px', '%', 'em', etc... )
                         , unit: 'em'
+
+                        // Lastly, easing is supported!
+                        // I am leveraging this library :https://www.npmjs.com/package/eases
+                        // Simply supply the camel-cased name of the function,
+                        // and the easing will be applied
+                        , easing: 'backInOut
                     }
                 }
             }
