@@ -257,16 +257,16 @@ List of features:
 
 ## API
 
-### TweenMachine(animationData [ Object ])
+### SmoothTween(animationData [ Object ])
 
 The Tweener constructor that gets loaded in accepts only one argument -- your JSON definition.
 
 ```javascript
-import TweenMachine from 'smooth-tween';
-let tweenInstance = TweenMachine(animationData);
+import SmoothTween from 'smooth-tween';
+let tweenInstance = SmoothTween(animationData);
 ```
 
-#### TweenMachine.updateTween(tweenValue [ Number | String ])
+#### SmoothTween.updateTween(tweenValue [ Number | String ])
 
 
 'updateTween' must be called in order to tell 'smoothTween' what the next value to tween is.
@@ -280,7 +280,7 @@ scrollLayer.on('scroll', (e) => {
 ```
 
 
-#### TweenMachine.recalculateStaticJson()
+#### SmoothTween.recalculateStaticJson()
 
 Users can specify JSON definitions with lazily evaluated functions.
 
