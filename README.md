@@ -409,33 +409,10 @@ let scrollHeight = $("[data-js='scroll-height]");
 // Using our JSON definition, construct the actual smoothTween instance
 let tweenInstance = smoothTween(animationData);
 
-// On resize, recalculate teh static json
-// so that we can properly set the height
-// of the scrollable div
-$(window).on('resize', resizeScrollerOnWindowResize)
-resizeScrollerOnWindowResize();
-
-function resizeScrollerOnWindowResize() {
-    var staticJson = tweenInstance.recalculateStaticJson();
-    var maxHeight = getMaxHeight_withAnimation_withWindowHeight( staticJson, $(window).height());
-    scrollHeight.height( maxHeight );
-}
-
 // Pass the tween value to the smoothTween instance so that it can render the next animation
 scrollLayer.on('scroll', (e) => {
     let scrollTop = scrollLayer.scrollTop();
     tweenInstance.updateTween(scrollTop);
 })
 
-// Parse through the JSON definition to find the maximum height
-// the window should be so that all animations get completed
-function getMaxHeight_withAnimation_withWindowHeight(staticAnimation, windowHeight) {
-    // Pull out the 'end' values
-    let end = _.map(staticAnimation, anim => anim.end);
-
-    // We need to add on one more screen height
-    let max = Math.max.apply(Math, end);
-
-    return max + windowHeight;
-}
 ```
