@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 import easingFunctions from 'eases';
 
 export function getFinishedAnimations__withTweenValue(animation, scrollTop) {
